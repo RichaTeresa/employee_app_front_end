@@ -1,0 +1,130 @@
+
+.employee-container {
+  margin-left: 300px;
+}
+
+
+.employee-list-wrapper {
+  padding: 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.employee-list-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
+}
+
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-filter {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.create-btn {
+  background-color: #0f92f3;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.create-btn:hover {
+  background-color: #0b7dd1;
+}
+
+
+.employee-list {
+  width: 100%;
+  font-family: sans-serif;
+}
+
+.employee-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 14px 16px;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0px 4px 7px 1px #9D9D9D29;
+}
+
+.employee-row.header {
+  font-weight: bold;
+  background-color: #eaf6fd;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  width: fit-content;
+}
+
+.status.active {
+  background-color: #c8f7c5;
+  color: #2c662d;
+}
+
+.status.inactive {
+  background-color: #fcdcdc;
+  color: #a94442;
+}
+
+.status.probation {
+  background-color: #fff9c4;
+  color: #8a6d3b;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 4px;
+}
+
+.actions button:hover{
+  background-color: #91caf5;
+}
+
+.plus-icon{
+  position: absolute;
+  left:18px; 
+  bottom: 18px;
+}
+
+h2{
+  font:Nunito Sans;
+}
+
+Link{
+  text-decoration: none;
+}

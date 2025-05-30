@@ -1,0 +1,26 @@
+.form-input input {
+  gap:15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #FAFAFA;
+ 
+}
+
+.form-input label {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input{
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.add-adornment{
+    display: flex;
+}
+

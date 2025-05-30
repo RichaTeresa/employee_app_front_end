@@ -1,0 +1,48 @@
+.aside{
+    width: 300px;
+    height: 100%;
+    background: #FFFFFF;
+    position:fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    
+}
+
+
+.icon-box {
+      
+      display:flex;
+      width: 300px;
+      height: 50px;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      background-color: #03AEEE;
+      margin-top: 20px;
+}
+
+.icon-text{
+    display: flex;
+    align-items: center;
+      justify-content: center;
+}
+
+.icon-circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left:10px ;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 50px;
+    margin-top: 10px;
+}
+
+
+.txt{
+
+    color: white;
+}
