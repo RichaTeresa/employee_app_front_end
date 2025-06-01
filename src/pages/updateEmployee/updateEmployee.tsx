@@ -15,8 +15,6 @@ export const UpdateEmployeeForm = () => {
    const dispatch = useDispatch();
 
   
-
-   
   const [values, setValues] = useState({
       name:employee?.name||"",
       employeeId:employee?.employeeId||"",
@@ -25,6 +23,9 @@ export const UpdateEmployeeForm = () => {
       department: employee?.departmentId||"",
       role: employee?.role||"",
       status: employee?.status||"",
+      email: employee?.email||"",
+      password: employee?.password||"",
+      age: employee?.age||0,
       houseNo: employee?.address?.houseNo||"",
       line1: employee?.address?.line1||"",
       line2: employee?.address?.line2||"",
@@ -54,6 +55,9 @@ export const UpdateEmployeeForm = () => {
       experience: values.experience,
       role: values.role,
       status: values.status,
+      email: values.email,
+      password: values.password,
+      age: values.age,
       employeeId: values.employeeId,
       departmentId: values.department,
       address: {
@@ -85,12 +89,14 @@ export const UpdateEmployeeForm = () => {
             ></CommonForm>
             <div className="form-button">
               <Button
+                type="submit"
                 buttonName="Update"
                 className="Create"
                 id="Create"
                 onClick={UpdateEmployee}
               ></Button>
               <Button
+                type="reset"
                 buttonName="Cancel"
                 className="Cancel"
                 id="Cancel"

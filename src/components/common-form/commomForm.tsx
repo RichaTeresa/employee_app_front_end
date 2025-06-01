@@ -11,17 +11,19 @@ export const CommonForm = ({
   isEdit: boolean;
   values: {
     name: string;
-    employeeId:string;
+    employeeId: string;
     dateOfJoining: string;
     experience: number;
     department: string;
     role: string;
     status: string;
+    email: string;
+    age: number;
+    password: string;
     houseNo: string;
     line1: string;
     line2: string;
     pincode: string;
-  
   };
   onChange: (field: string, value: string) => void;
 }) => {
@@ -87,8 +89,38 @@ export const CommonForm = ({
             onChange={(e) => onChange("status", e.target.value)}
           ></Select>
         </div>
+        <div className="form-element-group">
+          <Input
+            inputId="email"
+            inputType="email"
+            labelName="Email"
+            placeholder="Email"
+            value={values.email}
+            onChange={(e) => onChange("email", e.target.value)}
+          ></Input>
+        </div>
 
-        
+        <div className="form-element-group">
+          <Input
+            inputId="age"
+            inputType="number"
+            labelName="Age"
+            placeholder="Age"
+            value={values.age}
+            onChange={(e) => onChange("age", e.target.value)}
+          ></Input>
+        </div>
+
+        <div className="form-element-group">
+          <Input
+            inputId="password"
+            inputType="password"
+            labelName="Password"
+            placeholder="Password"
+            value={values.password}
+            onChange={(e) => onChange("password", e.target.value)}
+          ></Input>
+        </div>
 
         <div className="form-element-group">
           <MultiLineInput
@@ -121,23 +153,19 @@ export const CommonForm = ({
               },
             ]}
           ></MultiLineInput>
-          
         </div>
 
-        
-            <div className="form-element-group">
-              <Input
-                inputId="Employee Id"
-                inputType="text"
-                labelName="Employee Id"
-                placeholder="Employee Id"
-                value={values.employeeId}
-                onChange={(e) => onChange("employeeId", e.target.value)}
-                disabled={isEdit}
-              ></Input>
-            </div>
-    
-          
+        <div className="form-element-group">
+          <Input
+            inputId="Employee Id"
+            inputType="text"
+            labelName="Employee Id"
+            placeholder="Employee Id"
+            value={values.employeeId}
+            onChange={(e) => onChange("employeeId", e.target.value)}
+            disabled={isEdit}
+          ></Input>
+        </div>
       </div>
     </>
   );

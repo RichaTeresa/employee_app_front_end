@@ -12,11 +12,14 @@ export const CreateEmployeeForm = () => {
   const [values, setValues] = useState({
     name: "",
     employeeId:"",
-    dateOfJoining: "",
+    dateOfJoining: new Date().toISOString().split("T")[0], 
     experience: 0, 
     department: "",
     role: "",
     status: "",
+    email: "",
+    password: "",
+    age:0,
     houseNo: "",
     line1: "",
     line2: "",
@@ -31,7 +34,7 @@ export const CreateEmployeeForm = () => {
   const navigate = useNavigate();
 
   const handleCancel = () => {
-    navigate(-1);
+    navigate("/employees");
   };
 
   const CreateEmployee = (e: React.FormEvent) => {
@@ -45,6 +48,9 @@ export const CreateEmployeeForm = () => {
             experience: values.experience,
             role: values.role,
             status: values.status,
+            email: values.email,
+            password: values.password,
+            age: values.age,
             employeeId:values.employeeId,
             departmentId: values.department,
             address: {
@@ -76,12 +82,14 @@ export const CreateEmployeeForm = () => {
             ></CommonForm>
             <div className="form-button">
               <Button
+                type="submit"
                 buttonName="Create"
                 className="Create"
                 id="Create"
                 onClick={CreateEmployee}
               ></Button>
               <Button
+                type="reset"
                 buttonName="Cancel"
                 className="Cancel"
                 id="Cancel"
