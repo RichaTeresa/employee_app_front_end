@@ -8,6 +8,7 @@ function employeeReducer(
 ): EmployeeState {
   switch (action.type) {
     case EMPLOYEE_ACTION_TYPES.DELETE:
+      console.log(action.payload);
       return {
         ...state,
         employees: state.employees.filter(

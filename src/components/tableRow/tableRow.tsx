@@ -28,12 +28,12 @@ export const EmployeeRow = ({ employee }: { employee: EmployeeList }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleDelete = () => {
+  const handleDelete = (employeeId:string) => {
     dispatch({
     type: EMPLOYEE_ACTION_TYPES.DELETE,
-    payload: { employeeId: employee.employeeId}
+    payload: employeeId
   });
-    console.log("Employee deleted");
+    console.log(`Employee ${employeeId} deleted`);
     setModalOpen(false);
   };
 
@@ -66,7 +66,7 @@ export const EmployeeRow = ({ employee }: { employee: EmployeeList }) => {
       <DeletePopup
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        onConfirm={handleDelete}
+        onConfirm={()=>handleDelete(employee.employeeId)}
       ></DeletePopup>
     </div>
   );

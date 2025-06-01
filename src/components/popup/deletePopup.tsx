@@ -2,7 +2,7 @@ import React from 'react';
 import './deletePopup.css'; 
 import closeLogo from "../../assets/close (1).svg"
 
-export const DeletePopup = ({ isOpen, onClose, onConfirm }:{isOpen:boolean,onClose:()=>void,onConfirm:()=>void}) => {
+export const DeletePopup = ({ isOpen, onClose, onConfirm }:{isOpen:boolean,onClose:()=>void,onConfirm:(id:string)=>void}) => {
   if (!isOpen) return null;
 
   return (
@@ -14,7 +14,7 @@ export const DeletePopup = ({ isOpen, onClose, onConfirm }:{isOpen:boolean,onClo
         <h2 className="modal-title">Are you sure ?</h2>
         <p className="modal-message">Do you really want to delete employee ?</p>
         <div className="modal-buttons">
-          <button className="modal-confirm" onClick={onConfirm}>Confirm</button>
+          <button className="modal-confirm" onClick={() => onConfirm('')}>Confirm</button>
           <button className="modal-cancel" onClick={onClose}>Cancel</button>
         </div>
       </div>
