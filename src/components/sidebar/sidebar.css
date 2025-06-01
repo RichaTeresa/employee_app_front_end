@@ -46,3 +46,15 @@
 
     color: white;
 }
+
+.rectangle{
+
+    width: 300px;
+    background-color: #f9f9fa;
+    display:flex;
+    justify-content: center;
+}
+
+.kv-logo-img{
+    width:80%
+}

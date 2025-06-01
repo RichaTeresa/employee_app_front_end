@@ -4,13 +4,16 @@ import "./createEmployeeForm.css";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import Button from "../button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { EMPLOYEE_ACTION_TYPES, type EmployeeState } from "../../store/employee/employee.types";
+
 
 export const CreateEmployeeForm = () => {
   const [values, setValues] = useState({
-    employeeName: "",
+    name: "",
     employeeId:"",
-    joiningDate: "",
-    experience: 0,
+    dateOfJoining: "",
+    experience: 0, 
     department: "",
     role: "",
     status: "",
@@ -20,6 +23,11 @@ export const CreateEmployeeForm = () => {
     pincode:""
   });
 
+
+  const employees=useSelector((state:EmployeeState)=>state.employees)
+  console.log(employees)
+    const dispatch=useDispatch()
+
   const navigate = useNavigate();
 
   const handleCancel = () => {
@@ -28,8 +36,29 @@ export const CreateEmployeeForm = () => {
 
   const CreateEmployee = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(values);
+  
+
+    dispatch({type:EMPLOYEE_ACTION_TYPES.ADD,payload: {
+            id: employees.length + 1,
+            name: values.name,
+            dateOfJoining: values.dateOfJoining,
+            experience: values.experience,
+            role: values.role,
+            status: values.status,
+            employeeId:values.employeeId,
+            departmentId: values.department,
+            address: {
+                line1: values.line1,
+                line2: values.line2,
+                houseNo: values.houseNo,
+                pincode: values.pincode
+            }
+        }})
+    navigate("/employees");
   };
+
+
+  
 
   return (
     <>

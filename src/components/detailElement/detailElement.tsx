@@ -1,4 +1,4 @@
-export const DetailElement=({detailName,detail}:{detailName:string,detail?:string})=>{
+export const DetailElement=({detailName,detail}:{detailName:string,detail?:string|number})=>{
     return (
         <>
         <div className="detail-element">
@@ -8,3 +8,4 @@ export const DetailElement=({detailName,detail}:{detailName:string,detail?:strin
         </>
     )
 }
+

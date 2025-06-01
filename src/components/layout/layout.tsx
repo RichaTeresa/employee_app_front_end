@@ -24,7 +24,7 @@ if(!isLoggedIn()){
   return (
     <div>
       <Sidebar />
-
+      
       <Outlet />
     </div>
   );

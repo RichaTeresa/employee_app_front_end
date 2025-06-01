@@ -1,48 +1,71 @@
 import { useState } from "react";
 import { CommonForm } from "../../components/common-form/commomForm";
 import "./updateEmployee.css";
-import { useNavigate } from "react-router-dom";
-import type { Employee } from "../../components/tableRow/tableRow";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { EMPLOYEE_ACTION_TYPES, type EmployeeState } from "../../store/employee/employee.types";
 
 export const UpdateEmployeeForm = () => {
-  const SampleEmployee = {
-    employeeName: "richa",
-    employeeId: "id1",
-    joiningDate: "15-11-2021",
-    experience: 2,
-    department: "frontend",
-    role: "HR",
-    status: "ACTIVE",
-    houseNo: "house1",
-    line1: "123",
-    line2: "456",
-    pincode: "789",
-  };
+  
 
+  const { id } = useParams();
+  const employee = useSelector((state:EmployeeState)=>state.employees.find(emp => emp.id.toString() === id)
+  );
+   const dispatch = useDispatch();
+
+  
+
+   
   const [values, setValues] = useState({
-    employeeName: SampleEmployee.employeeName,
-    employeeId: SampleEmployee.employeeId,
-    joiningDate: SampleEmployee.joiningDate,
-    experience: SampleEmployee.experience,
-    department: SampleEmployee.department,
-    role: SampleEmployee.role,
-    status: SampleEmployee.status,
-    houseNo: SampleEmployee.houseNo,
-    line1: SampleEmployee.line1,
-    line2: SampleEmployee.line2,
-    pincode: SampleEmployee.pincode,
-  });
+      name:employee?.name||"",
+      employeeId:employee?.employeeId||"",
+      dateOfJoining: employee?.dateOfJoining||"",
+      experience: employee?.experience||0, 
+      department: employee?.departmentId||"",
+      role: employee?.role||"",
+      status: employee?.status||"",
+      houseNo: employee?.address?.houseNo||"",
+      line1: employee?.address?.line1||"",
+      line2: employee?.address?.line2||"",
+      pincode: employee?.address?.pincode||""
+    });
+
 
   const navigate = useNavigate();
 
   const handleCancel = () => {
-    navigate(-1);
+    navigate("/employees");
   };
 
-  const CreateEmployee = (e: React.FormEvent) => {
+  const UpdateEmployee = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(values);
+     if (!employee) {
+    console.error("Employee not found");
+    return;
+  }
+
+  dispatch({
+    type: EMPLOYEE_ACTION_TYPES.UPDATE,
+    payload: {
+      id: employee.id,
+      name: values.name,
+      dateOfJoining: values.dateOfJoining,
+      experience: values.experience,
+      role: values.role,
+      status: values.status,
+      employeeId: values.employeeId,
+      departmentId: values.department,
+      address: {
+        line1: values.line1,
+        line2: values.line2,
+        houseNo: values.houseNo,
+        pincode: values.pincode
+      }
+    }
+  });
+
+    navigate("/employees");
   };
 
   return (
@@ -65,7 +88,7 @@ export const UpdateEmployeeForm = () => {
                 buttonName="Update"
                 className="Create"
                 id="Create"
-                onClick={CreateEmployee}
+                onClick={UpdateEmployee}
               ></Button>
               <Button
                 buttonName="Cancel"

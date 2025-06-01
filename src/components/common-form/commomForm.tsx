@@ -10,9 +10,9 @@ export const CommonForm = ({
 }: {
   isEdit: boolean;
   values: {
-    employeeName: string;
+    name: string;
     employeeId:string;
-    joiningDate: string;
+    dateOfJoining: string;
     experience: number;
     department: string;
     role: string;
@@ -21,6 +21,7 @@ export const CommonForm = ({
     line1: string;
     line2: string;
     pincode: string;
+  
   };
   onChange: (field: string, value: string) => void;
 }) => {
@@ -33,8 +34,8 @@ export const CommonForm = ({
             inputType="text"
             labelName="Employee Name"
             placeholder="employee_name"
-            value={values.employeeName}
-            onChange={(e) => onChange("employeeName", e.target.value)}
+            value={values.name}
+            onChange={(e) => onChange("name", e.target.value)}
           ></Input>
         </div>
 
@@ -44,8 +45,8 @@ export const CommonForm = ({
             inputType="text"
             labelName="Joining Date"
             placeholder="joining_date"
-            value={values.joiningDate}
-            onChange={(e) => onChange("joiningDate", e.target.value)}
+            value={values.dateOfJoining}
+            onChange={(e) => onChange("dateOfJoining", e.target.value)}
           ></Input>
         </div>
 

@@ -7,7 +7,9 @@ export const Sidebar=()=>{
     return(
         <>
         <div className="aside">
-            <img src={kvLogo} width="300px"></img>
+            <div className='rectangle'>
+            <img className="kv-logo-img"src={kvLogo} width="300px"></img>
+            </div>
         <div className="icon-box">
              <div className="icon-circle">
                  <img src={icon} width="20px"></img>

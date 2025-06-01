@@ -8,7 +8,8 @@ import { CreateEmployeeForm } from "./components/form/createEmployeeForm";
 import { EmployeeDetails } from './pages/employeeDetails/employeeDetails';
 import  EmployeeList  from "./pages/employeeList/employeeList";
 import { UpdateEmployeeForm } from "./pages/updateEmployee/updateEmployee";
-
+import { Provider } from "react-redux";
+import store from "./store/store";
 // const navigate=useNavigate()
 
 
@@ -52,11 +53,12 @@ const router=createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <><Provider store={store}>
        <RouterProvider router={router}/>
        {/* <UncontrolledLogin/> */}
       {/* <Login /> */}
       {/* <CreateEmployee/> */}
+      </Provider>
     </>
   );
 }

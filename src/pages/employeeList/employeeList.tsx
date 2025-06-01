@@ -1,43 +1,85 @@
 import React, { useRef } from "react";
 import { EmployeeRow } from "../../components/tableRow/tableRow";
 import "./employeeList.css";
-import type { Employee, Status } from "../../components/tableRow/tableRow";
+
 import { Link, useSearchParams } from "react-router-dom";
 import BLUE_CIRCLE from "../../assets/blue-circle-icon.svg"
 import plus from '../../assets/plus-icon.svg'
+import { useSelector } from "react-redux";
+import type { EmployeeState } from "../../store/employee/employee.types";
 
-const employeeData: Employee[] = [
+const employeeDatalist= [
   {
     id: 1,
-    name: "Vishal M",
-    EmployeeId: "Lazada",
-    joiningDate: "12.04.2021",
-    role: "Full Stack",
-    status: "Inactive" as Status,
-    experience: "5 Years",
+    name: "John",
+    dateOfJoining: "2025-01-23",
+    experience: 3,
+    role: "HR",
+    status: "ACTIVE",
+    employeeId: "dfuy54g85478d8937",
+    address: {
+      line1: "22nd",
+      line2: "Baker Street",
+      houseNo: "22B",
+      pincode: "987890",
+    },
   },
   {
     id: 2,
-    name: "Susan Kurian",
-    EmployeeId: "XYZ",
-    joiningDate: "12.04.2021",
-    role: "UI Engineer",
-    status: "Probation" as Status,
-    experience: "7 Years",
+    name: "Jane",
+    dateOfJoining: "2025-01-23",
+    experience: 3,
+    role: "HR",
+    status: "INACTIVE",
+    employeeId: "kg5903ej3uhg20943",
+    address: {
+      line1: "22nd",
+      line2: "Baker Street",
+      houseNo: "22B",
+      pincode: "987890",
+    },
   },
   {
     id: 3,
-    name: "Yugesh",
-    EmployeeId: "XYZ",
-    joiningDate: "12.04.2021",
-    role: "Devops",
-    status: "Active" as Status,
-    experience: "6 Years",
+    name: "Mack",
+    dateOfJoining: "2025-01-23",
+    experience: 3,
+    role: "HR",
+    status: "ACTIVE",
+    employeeId: "f949h2948u3098g",
+    address: {
+      line1: "22nd",
+      line2: "Baker Street",
+      houseNo: "22B",
+      pincode: "987890",
+    },
+  },
+  {
+    id: 4,
+    name: "Max",
+    dateOfJoining: "2025-01-23",
+    experience: 3,
+    role: "HR",
+    status: "PROBATION",
+    employeeId: "nju3he3879e393e",
+    address: {
+      line1: "22nd",
+      line2: "Baker Street",
+      houseNo: "22B",
+      pincode: "987890",
+    },
   },
 ];
 
-const EmployeeList: React.FC = () => {
+
+
+
+const EmployeeList = () => {
+  const newEmployee=useSelector((state:EmployeeState)=>state.employees);
+  console.log(newEmployee)
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const employees=newEmployee.length!==0? newEmployee:employeeDatalist;
 
   const getFilter = () => {
     const filter = searchParams.get("filter");
@@ -63,9 +105,9 @@ const EmployeeList: React.FC = () => {
               }}
             >
               <option value="All">All</option>
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
-              <option value="Probation">Probation</option>
+              <option value="ACTIVE">Active</option>
+              <option value="INACTIVE">Inactive</option>
+              <option value="PROBATION">Probation</option>
             </select>
             <Link to="create" style={{textDecoration:"none"}}>
               <button className="edit-button">
@@ -87,9 +129,9 @@ const EmployeeList: React.FC = () => {
             <div>Experience</div>
             <div>Action</div>
           </div>
-          {(filter && filter !== ("All" as Status)
-            ? employeeData.filter((employee) => employee.status === getFilter())
-            : employeeData
+          {(filter && filter !== ("All")
+            ? employees.filter((employee) => employee.status === getFilter())
+            : employees
           ).map((employee, index) => (
             <EmployeeRow key={index} employee={employee} />
           ))}
