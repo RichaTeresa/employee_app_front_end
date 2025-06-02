@@ -1,85 +1,90 @@
-import React, { useRef } from "react";
+
 import { EmployeeRow } from "../../components/tableRow/tableRow";
 import "./employeeList.css";
 
 import { Link, useSearchParams } from "react-router-dom";
 import BLUE_CIRCLE from "../../assets/blue-circle-icon.svg"
 import plus from '../../assets/plus-icon.svg'
-import { useSelector } from "react-redux";
-import type { EmployeeState } from "../../store/employee/employee.types";
 
-const employeeDatalist= [
-  {
-    id: 1,
-    name: "John",
-    dateOfJoining: "2025-01-23",
-    experience: 3,
-    role: "HR",
-    status: "ACTIVE",
-    employeeId: "dfuy54g85478d8937",
-    address: {
-      line1: "22nd",
-      line2: "Baker Street",
-      houseNo: "22B",
-      pincode: "987890",
-    },
-  },
-  {
-    id: 2,
-    name: "Jane",
-    dateOfJoining: "2025-01-23",
-    experience: 3,
-    role: "HR",
-    status: "INACTIVE",
-    employeeId: "kg5903ej3uhg20943",
-    address: {
-      line1: "22nd",
-      line2: "Baker Street",
-      houseNo: "22B",
-      pincode: "987890",
-    },
-  },
-  {
-    id: 3,
-    name: "Mack",
-    dateOfJoining: "2025-01-23",
-    experience: 3,
-    role: "HR",
-    status: "ACTIVE",
-    employeeId: "f949h2948u3098g",
-    address: {
-      line1: "22nd",
-      line2: "Baker Street",
-      houseNo: "22B",
-      pincode: "987890",
-    },
-  },
-  {
-    id: 4,
-    name: "Max",
-    dateOfJoining: "2025-01-23",
-    experience: 3,
-    role: "HR",
-    status: "PROBATION",
-    employeeId: "nju3he3879e393e",
-    address: {
-      line1: "22nd",
-      line2: "Baker Street",
-      houseNo: "22B",
-      pincode: "987890",
-    },
-  },
-];
+import type { Employee, EmployeeState } from "../../store/employee/employee.types";
+import { useAppSelector } from "../../store/store";
+import { useDeleteEmployeeMutation, useGetEmployeeListQuery } from "../../api-service/employees/employees.api";
+
+// const employeeDatalist= [
+//   {
+//     id: 1,
+//     name: "John",
+//     dateOfJoining: "2025-01-23",
+//     experience: 3,
+//     role: "HR",
+//     status: "ACTIVE",
+//     employeeId: "dfuy54g85478d8937",
+//     address: {
+//       line1: "22nd",
+//       line2: "Baker Street",
+//       houseNo: "22B",
+//       pincode: "987890",
+//     },
+//   },
+//   {
+//     id: 2,
+//     name: "Jane",
+//     dateOfJoining: "2025-01-23",
+//     experience: 3,
+//     role: "HR",
+//     status: "INACTIVE",
+//     employeeId: "kg5903ej3uhg20943",
+//     address: {
+//       line1: "22nd",
+//       line2: "Baker Street",
+//       houseNo: "22B",
+//       pincode: "987890",
+//     },
+//   },
+//   {
+//     id: 3,
+//     name: "Mack",
+//     dateOfJoining: "2025-01-23",
+//     experience: 3,
+//     role: "HR",
+//     status: "ACTIVE",
+//     employeeId: "f949h2948u3098g",
+//     address: {
+//       line1: "22nd",
+//       line2: "Baker Street",
+//       houseNo: "22B",
+//       pincode: "987890",
+//     },
+//   },
+//   {
+//     id: 4,
+//     name: "Max",
+//     dateOfJoining: "2025-01-23",
+//     experience: 3,
+//     role: "HR",
+//     status: "PROBATION",
+//     employeeId: "nju3he3879e393e",
+//     address: {
+//       line1: "22nd",
+//       line2: "Baker Street",
+//       houseNo: "22B",
+//       pincode: "987890",
+//     },
+//   },
+// ];
 
 
 
 
 const EmployeeList = () => {
-  const newEmployee=useSelector((state:EmployeeState)=>state.employees);
+  const newEmployee = useAppSelector((state) => state.employee.employees);
   console.log(newEmployee)
   const [searchParams, setSearchParams] = useSearchParams();
+  const employees=useGetEmployeeListQuery({})
 
-  const employees=newEmployee.length!==0? newEmployee:employeeDatalist;
+  console.log(employees)
+
+  //  const employees=newEmployee.length!==0? newEmployee:employeeDatalist;
 
   const getFilter = () => {
     const filter = searchParams.get("filter");
@@ -87,7 +92,12 @@ const EmployeeList = () => {
     return filter;
   };
 
+  
+
+
   const filter = getFilter();
+
+
 
   return (
     <div className="employee-container">
@@ -129,10 +139,13 @@ const EmployeeList = () => {
             <div>Experience</div>
             <div>Action</div>
           </div>
-          {(filter && filter !== ("All")
-            ? employees.filter((employee) => employee.status === getFilter())
-            : employees
-          ).map((employee, index) => (
+          {(employees.data
+            ? (filter && filter !== "All"
+                ? employees.data.filter((employee:Employee) => employee.status === getFilter())
+                : employees.data
+              )
+            : []
+          ).map((employee:Employee, index) => (
             <EmployeeRow key={index} employee={employee} />
           ))}
         </div>

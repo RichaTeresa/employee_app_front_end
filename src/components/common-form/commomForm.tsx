@@ -14,7 +14,7 @@ export const CommonForm = ({
     employeeId: string;
     dateOfJoining: string;
     experience: number;
-    department: string;
+    departmentId: number | string;
     role: string;
     status: string;
     email: string;
@@ -66,16 +66,25 @@ export const CommonForm = ({
           <Select
             selectId="Department"
             selectName="Department"
-            items={["frontend", "backend"]}
-            value={values.department}
-            onChange={(e) => onChange("department", e.target.value)}
+            items={[
+              { label: "frontend", value: 1 },
+              { label: "backend", value: 2 },
+              { label: "design", value: 3 },
+            ]}
+            value={values.departmentId}
+            onChange={(e) => onChange("departmentId", e.target.value)}
           ></Select>
         </div>
         <div className="form-element-group">
           <Select
             selectId="Role"
             selectName="Role"
-            items={["HR", "DEVELOPER", "UI", "UX"]}
+            items={[
+              { label: "HR", value: "HR" },
+              { label: "DEVELOPER", value: "DEVELOPER" },
+              { label: "UI", value: "UI" },
+              { label: "UX", value: "UX" },
+            ]}
             value={values.role}
             onChange={(e) => onChange("role", e.target.value)}
           ></Select>
@@ -84,7 +93,11 @@ export const CommonForm = ({
           <Select
             selectId="Status"
             selectName="Status"
-            items={["ACTIVE", "INACTIVE", "PROBATION"]}
+            items={[
+              { label: "ACTIVE", value: "ACTIVE" },
+              { label: "INACTIVE", value: "INACTIVE" },
+              { label: "PROBATION", value: "PROBATION" },
+            ]}
             value={values.status}
             onChange={(e) => onChange("status", e.target.value)}
           ></Select>

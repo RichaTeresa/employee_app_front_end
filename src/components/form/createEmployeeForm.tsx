@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import Button from "../button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { EMPLOYEE_ACTION_TYPES, type EmployeeState } from "../../store/employee/employee.types";
+import { EMPLOYEE_ACTION_TYPES, type EmployeeState ,type Role,type Status} from "../../store/employee/employee.types";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { addEmployee } from "../../store/employee/employeeReducer";
+import { useCreateEmployeeMutation } from "../../api-service/employees/employees.api";
 
 
 export const CreateEmployeeForm = () => {
@@ -13,23 +16,27 @@ export const CreateEmployeeForm = () => {
     name: "",
     employeeId:"",
     dateOfJoining: new Date().toISOString().split("T")[0], 
-    experience: 0, 
-    department: "",
-    role: "",
-    status: "",
+    experience: "" as unknown as number, 
+    departmentId: ""as unknown as number,
+    role: "" as Role,
+    status: "" as Status,
     email: "",
     password: "",
-    age:0,
+    age:"" as unknown as number,
     houseNo: "",
     line1: "",
     line2: "",
     pincode:""
   });
+  
 
+  
+//  const employees=useAppSelector(state=>state.employee.employees)
+ const [createEmployeeApi] = useCreateEmployeeMutation();
 
-  const employees=useSelector((state:EmployeeState)=>state.employees)
-  console.log(employees)
-    const dispatch=useDispatch()
+  
+  // console.log(employees)
+
 
   const navigate = useNavigate();
 
@@ -37,31 +44,37 @@ export const CreateEmployeeForm = () => {
     navigate("/employees");
   };
 
-  const CreateEmployee = (e: React.FormEvent) => {
-    e.preventDefault();
-  
+  const CreateEmployee = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    dispatch({type:EMPLOYEE_ACTION_TYPES.ADD,payload: {
-            id: employees.length + 1,
-            name: values.name,
-            dateOfJoining: values.dateOfJoining,
-            experience: values.experience,
-            role: values.role,
-            status: values.status,
-            email: values.email,
-            password: values.password,
-            age: values.age,
-            employeeId:values.employeeId,
-            departmentId: values.department,
-            address: {
-                line1: values.line1,
-                line2: values.line2,
-                houseNo: values.houseNo,
-                pincode: values.pincode
-            }
-        }})
-    navigate("/employees");
+  const payload = {
+    id: 0, 
+    employeeId: values.employeeId,
+    dateOfJoining: new Date(values.dateOfJoining),
+    status: values.status,
+    experience: Number(values.experience),
+    name: values.name,
+    email: values.email,
+    age: Number(values.age),
+    role: values.role,
+    deptId: Number(values.departmentId),
+    password: values.password,
+    address: {
+      houseNo: values.houseNo,
+      line1: values.line1,
+      line2: values.line2,
+      pincode: values.pincode,
+    },
   };
+
+  try {
+    await createEmployeeApi(payload).unwrap();
+    navigate("/employees");
+  } catch (err) {
+    console.error("Create employee failed", err);
+  }
+};
+
 
 
   

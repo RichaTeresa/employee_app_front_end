@@ -4,32 +4,36 @@ import "./updateEmployee.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { EMPLOYEE_ACTION_TYPES, type EmployeeState } from "../../store/employee/employee.types";
+import { EMPLOYEE_ACTION_TYPES, type EmployeeState, type Role, type Status } from "../../store/employee/employee.types";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { UpdateEmployee } from "../../store/employee/employeeReducer";
+import { useGetEmployeeByIdQuery, useUpdateEmployeeMutation } from "../../api-service/employees/employees.api";
 
 export const UpdateEmployeeForm = () => {
   
 
   const { id } = useParams();
-  const employee = useSelector((state:EmployeeState)=>state.employees.find(emp => emp.id.toString() === id)
-  );
-   const dispatch = useDispatch();
-
+  // const employee = useAppSelector(state=>state.employee.employees.find(emp => emp.employeeId.toString() === id))
+  const {data:employee}=useGetEmployeeByIdQuery({id})
+  console.log(employee)
+  const [updateEmployeeApi] = useUpdateEmployeeMutation();
   
   const [values, setValues] = useState({
-      name:employee?.name||"",
-      employeeId:employee?.employeeId||"",
-      dateOfJoining: employee?.dateOfJoining||"",
-      experience: employee?.experience||0, 
-      department: employee?.departmentId||"",
-      role: employee?.role||"",
-      status: employee?.status||"",
-      email: employee?.email||"",
-      password: employee?.password||"",
-      age: employee?.age||0,
-      houseNo: employee?.address?.houseNo||"",
-      line1: employee?.address?.line1||"",
-      line2: employee?.address?.line2||"",
-      pincode: employee?.address?.pincode||""
+      id: employee?.id || 0,
+      name: employee?.name || "",
+      employeeId: employee?.employeeId || "",
+      dateOfJoining: employee?.dateOfJoining as unknown as string || "",
+      experience: employee?.experience || "" as unknown as number,
+      departmentId: employee?.departmentId || "", // <-- Add this line
+      role: employee?.role || "" as Role,
+      status: employee?.status || "" as Status,
+      email: employee?.email || "",
+      password: employee?.password || "",
+      age: employee?.age || "" as unknown as number,
+      houseNo: employee?.address?.houseNo || "",
+      line1: employee?.address?.line1 || "",
+      line2: employee?.address?.line2 || "",
+      pincode: employee?.address?.pincode || ""
     });
 
 
@@ -39,37 +43,35 @@ export const UpdateEmployeeForm = () => {
     navigate("/employees");
   };
 
-  const UpdateEmployee = (e: React.FormEvent) => {
+  const editEmployee = async(e: React.FormEvent) => {
     e.preventDefault();
-     if (!employee) {
-    console.error("Employee not found");
-    return;
+     const payload = {
+      id: values.id, 
+    employeeId: values.employeeId,
+    name: values.name,
+    dateOfJoining: values.dateOfJoining,
+    experience: Number(values.experience),
+    role: values.role,
+    status: values.status,
+    email: values.email,
+    password: values.password,
+    age: Number(values.age),
+    deptId: Number(values.departmentId), // ✅ Must be deptId
+    address: {
+      line1: values.line1,
+      line2: values.line2,
+      houseNo: values.houseNo,
+      pincode: values.pincode,
+    },
+  };
+
+  try {
+    await updateEmployeeApi({ id: values.id, payload }).unwrap();
+    navigate("/employees"); // or any success route
+  } catch (err) {
+    console.error("Update failed", err);
+    // Show error message to user if needed
   }
-
-  dispatch({
-    type: EMPLOYEE_ACTION_TYPES.UPDATE,
-    payload: {
-      id: employee.id,
-      name: values.name,
-      dateOfJoining: values.dateOfJoining,
-      experience: values.experience,
-      role: values.role,
-      status: values.status,
-      email: values.email,
-      password: values.password,
-      age: values.age,
-      employeeId: values.employeeId,
-      departmentId: values.department,
-      address: {
-        line1: values.line1,
-        line2: values.line2,
-        houseNo: values.houseNo,
-        pincode: values.pincode
-      }
-    }
-  });
-
-    navigate("/employees");
   };
 
   return (
@@ -93,7 +95,7 @@ export const UpdateEmployeeForm = () => {
                 buttonName="Update"
                 className="Create"
                 id="Create"
-                onClick={UpdateEmployee}
+                onClick={editEmployee}
               ></Button>
               <Button
                 type="reset"

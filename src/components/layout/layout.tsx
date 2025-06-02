@@ -11,8 +11,10 @@ import { CreateEmployeeForm } from "../form/createEmployeeForm";
 export const Layout = () => {
 
     const isLoggedIn=()=>{
-  const token=localStorage.getItem("isLoggedIn");
-  return token==="true";
+  const token=localStorage.getItem("token");
+  if(token)
+   { return true;}
+  return false
 }
  
 if(!isLoggedIn()){
@@ -24,7 +26,7 @@ if(!isLoggedIn()){
   return (
     <div>
       <Sidebar />
-      
+
       <Outlet />
     </div>
   );

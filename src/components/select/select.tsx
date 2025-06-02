@@ -9,8 +9,8 @@ export const Select = ({
 }: {
   selectId: string;
   selectName: string;
-  items: string[];
-  value?: string;
+  items:{ label: string; value: string | number }[]
+  value?: number|string;
   onChange?:(event:React.ChangeEvent<HTMLSelectElement>)=>void;
 }) => {
   return (
@@ -22,7 +22,7 @@ export const Select = ({
             choose {selectId}
           </option>
           {items.map((item) => {
-            return <option value={item}>{item}</option>;
+            return <option value={item.value}>{item.label}</option>;
           })}
         </select>
       </div>

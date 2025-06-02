@@ -7,6 +7,7 @@
 .employee-list-wrapper {
   padding: 30px;
   font-family: 'Segoe UI', sans-serif;
+  overflow-y: auto; 
 }
 
 .employee-list-header-row {

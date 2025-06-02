@@ -10,12 +10,6 @@ import  EmployeeList  from "./pages/employeeList/employeeList";
 import { UpdateEmployeeForm } from "./pages/updateEmployee/updateEmployee";
 import { Provider } from "react-redux";
 import store from "./store/store";
-// const navigate=useNavigate()
-
-
-// if(isLoggedIn()){
-//   navigate("/employees")
-// }
 
 
 const router=createBrowserRouter([

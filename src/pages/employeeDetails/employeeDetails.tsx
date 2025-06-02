@@ -8,6 +8,8 @@ import BLUE_CIRCLE from "../../assets/blue-circle-icon.svg";
 import PENCIL from "../../assets/pencil-icon.svg";
 import { useSelector } from "react-redux";
 import type { EmployeeState } from "../../store/employee/employee.types";
+import { useAppSelector } from "../../store/store";
+import { useGetEmployeeByIdQuery } from "../../api-service/employees/employees.api";
 
 // const exampleEmployee = {
 //   id: 1,
@@ -24,12 +26,14 @@ import type { EmployeeState } from "../../store/employee/employee.types";
 // };
 
 
-
 export const EmployeeDetails = () => {
+  
   const { id } = useParams();
   console.log(id);
+  const {data:newEmployee}=useGetEmployeeByIdQuery({id})
+  
 
-  const newEmployee=useSelector((state:EmployeeState)=>state.employees.find(emp => emp.id.toString() === id));
+  // const newEmployee=useAppSelector(state=>state.employee.employees.find(emp => emp.employeeId.toString() === id));
   console.log(newEmployee)
 
   if (!newEmployee) return <div>Employee not found.</div>;

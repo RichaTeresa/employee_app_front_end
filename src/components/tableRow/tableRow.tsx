@@ -5,10 +5,11 @@ import dustbin from "../../assets/dustbin.svg";
 import { Link, Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { DeletePopup } from "../popup/deletePopup";
 import { useDispatch } from "react-redux";
-import { EMPLOYEE_ACTION_TYPES } from "../../store/employee/employee.types";
+import { EMPLOYEE_ACTION_TYPES, type Employee } from "../../store/employee/employee.types";
+import { useDeleteEmployeeMutation, } from "../../api-service/employees/employees.api";
 
 export interface EmployeeList {
-  id: number;
+  id:number
   name: string;
   dateOfJoining: string;
   experience: number;
@@ -23,17 +24,16 @@ export interface EmployeeList {
   };
 }
 
-export const EmployeeRow = ({ employee }: { employee: EmployeeList }) => {
+export const EmployeeRow = ({ employee }: { employee: Employee}) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [deleteEmployee] = useDeleteEmployeeMutation();
 
-  const handleDelete = (employeeId:string) => {
-    dispatch({
-    type: EMPLOYEE_ACTION_TYPES.DELETE,
-    payload: employeeId
-  });
-    console.log(`Employee ${employeeId} deleted`);
+
+  const handleDelete = (id:number) => {
+    deleteEmployee({id});
+    console.log(`Employee ${id} deleted`);
     setModalOpen(false);
   };
 
@@ -46,7 +46,7 @@ export const EmployeeRow = ({ employee }: { employee: EmployeeList }) => {
     <div className="employee-row">
       <div onClick={() => goToEmployee(employee.id)}>{employee.name}</div>
       <div>{employee.employeeId}</div>
-      <div>{employee.dateOfJoining}</div>
+      <div>{employee.dateOfJoining as unknown as string}</div>
       <div>{employee.role}</div>
       <div className={`status ${employee.status.toLowerCase()}`}>
         {employee.status}
@@ -66,7 +66,7 @@ export const EmployeeRow = ({ employee }: { employee: EmployeeList }) => {
       <DeletePopup
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        onConfirm={()=>handleDelete(employee.employeeId)}
+        onConfirm={()=>handleDelete(employee.id)}
       ></DeletePopup>
     </div>
   );
