@@ -72,7 +72,7 @@ export const CommonForm = ({
             selectName="Department"
             items={
               departmentList? 
-              departmentList.map((dept) => ({
+              departmentList.map((dept: { deptName: string; id: string|number; }) => ({
                     label: dept.deptName,
                     value: dept.id,
                   }))

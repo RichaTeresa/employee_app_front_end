@@ -1,0 +1,112 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Login Page > should match snapshot 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="leftside"
+    >
+      <img
+        alt="kv-login"
+        class="circle"
+        src="/src/assets/kv-login.jpeg"
+      />
+    </div>
+    <div
+      class="rightside"
+    >
+      <p>
+        X coordinate:
+        0
+         Y coordinate :
+        0
+      </p>
+      <div
+        class="login-box"
+      >
+        <img
+          alt="kv-logo"
+          class="logo"
+          src="/src/assets/kv-logo.png"
+        />
+        <div
+          class="form-input-2"
+        >
+          <label
+            for="username"
+          />
+          <div
+            class="add-adornment"
+          >
+            <input
+              id="username"
+              placeholder="username"
+              required=""
+              type="text"
+              value=""
+            />
+            <button
+              disabled=""
+            >
+              clear
+            </button>
+          </div>
+        </div>
+        <div
+          class="form-input-2"
+        >
+          <label
+            for="password"
+          />
+          <div
+            class="add-adornment"
+          >
+            <input
+              id="password"
+              placeholder="password"
+              required=""
+              type="password"
+              value=""
+            />
+            <button
+              disabled=""
+            >
+              clear
+            </button>
+          </div>
+        </div>
+        <div
+          class="form-input-2"
+        >
+          <label
+            for="showPassword"
+          >
+            show password
+          </label>
+          <div
+            class="add-adornment"
+          >
+            <input
+              id="showPassword"
+              required=""
+              type="checkbox"
+            />
+          </div>
+        </div>
+        <p
+          style="color: red;"
+        />
+        <button
+          class="login-button"
+          id="login"
+          type="submit"
+        >
+          logging in
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

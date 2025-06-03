@@ -1,14 +1,27 @@
 import kvLogo from '../../assets/kv-logo.png'
 import icon from '../../assets/icon.svg'
 import './sidebar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Button from '../button/Button'
 
 
 export const Sidebar=()=>{
+    const navigate = useNavigate();
+    const onLogout=()=>{
+        localStorage.setItem("token","")
+        navigate("/")
+    }
+
     return(
         <>
         <div className='white-top-section'>
-            
+            <Button
+                type="submit"
+                buttonName="Logout"
+                className="Logout"
+                id="Logout"
+                onClick={onLogout}
+              ></Button>
         </div>
         <div className="aside">
             <div className='rectangle'>
