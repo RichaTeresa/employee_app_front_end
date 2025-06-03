@@ -30,7 +30,7 @@ export const CreateEmployeeForm = () => {
   });
   
 
-  
+  const [error, setError] = useState("");
 //  const employees=useAppSelector(state=>state.employee.employees)
  const [createEmployeeApi] = useCreateEmployeeMutation();
 
@@ -70,8 +70,13 @@ export const CreateEmployeeForm = () => {
   try {
     await createEmployeeApi(payload).unwrap();
     navigate("/employees");
-  } catch (err) {
-    console.error("Create employee failed", err);
+  } catch (error) {
+    console.log("Create employee failed", error);
+    if (error && typeof error === "object" && "data" in error && error.data && typeof error.data === "object" && "mesage" in error.data) {
+      setError((error as { data: { mesage: string } }).data.mesage);
+    } else {
+      setError("Create employee failed");
+    }
   }
 };
 
@@ -93,6 +98,7 @@ export const CreateEmployeeForm = () => {
                 setValues({ ...values, [field]: value })
               }
             ></CommonForm>
+            <p style={{ color: "red" }}>{error}</p>
             <div className="form-button">
               <Button
                 type="submit"

@@ -1,25 +1,25 @@
 .form-element input {
-  gap:15px;
+  gap: 15px;
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 .form-element label {
-    margin-bottom: 8px;
-    font-weight: 500;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
-input{
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    background-color: #fff;
+input {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fafafa 0% 0% no-repeat padding-box;
+  border: 1px solid #d9d9d9;
+  opacity: 1;
 }
-
 
 input:disabled {
-  background-color:rgb(209, 207, 207);
+  background-color: rgb(209, 207, 207);
   cursor: not-allowed;
 }

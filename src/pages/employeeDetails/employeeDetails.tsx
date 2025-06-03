@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import "./employeeDetails.css";
 import { useSearchParams } from "react-router-dom";
 import { useRef } from "react";
-import type { EmployeeList } from "../../components/tableRow/tableRow";
+
 import { DetailElement } from "../../components/detailElement/detailElement";
 import BLUE_CIRCLE from "../../assets/blue-circle-icon.svg";
 import PENCIL from "../../assets/pencil-icon.svg";
@@ -11,19 +11,6 @@ import type { EmployeeState } from "../../store/employee/employee.types";
 import { useAppSelector } from "../../store/store";
 import { useGetEmployeeByIdQuery } from "../../api-service/employees/employees.api";
 
-// const exampleEmployee = {
-//   id: 1,
-//   name: "John",
-//   dateOfJoining: "2025-01-23",
-//   experience: 3,
-//   role: "HR",
-//   status: "Active",
-//   employeeId: "dfuy54g85478d8937",
-//   line1: "22nd",
-//   line2: "Baker Street",
-//   houseNo: "22B",
-//   pincode: "987890",
-// };
 
 
 export const EmployeeDetails = () => {
@@ -32,11 +19,26 @@ export const EmployeeDetails = () => {
   console.log(id);
   const {data:newEmployee}=useGetEmployeeByIdQuery({id})
   
+  function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); 
+  const year = String(date.getFullYear()).slice(-2); 
+  return `${day}-${month}-${year}`;
+}
 
-  // const newEmployee=useAppSelector(state=>state.employee.employees.find(emp => emp.employeeId.toString() === id));
   console.log(newEmployee)
 
-  if (!newEmployee) return <div>Employee not found.</div>;
+  if (!newEmployee) return (
+    <main>
+    <div className="form-head">
+          <h2>Employee Details</h2>
+  </div>
+  <div className="error-body">
+    <h3>Employee {id} does not exist!</h3>
+  </div>
+</main>
+  )
 
   return (
     <>
@@ -62,7 +64,7 @@ export const EmployeeDetails = () => {
             ></DetailElement>
             <DetailElement
               detailName="Joining Date"
-              detail={newEmployee.dateOfJoining as unknown as string}
+              detail={formatDate(newEmployee.dateOfJoining as unknown as string)}
             ></DetailElement>
             <DetailElement
               detailName="Experience"

@@ -7,7 +7,8 @@ const Input = ({
   placeholder,
   value,
   onChange,
-  disabled
+  disabled,
+  noPassword
 }: {
   inputId: string;
   inputType: string;
@@ -16,7 +17,11 @@ const Input = ({
   value?: string|number;
   onChange?:(event:React.ChangeEvent<HTMLInputElement>)=>void;
   disabled?:boolean
+  noPassword?:boolean
 }) => {
+  if(noPassword){
+    return 
+  }
   return (
     <div className="form-element">
       <label htmlFor={inputId}>{labelName}</label>

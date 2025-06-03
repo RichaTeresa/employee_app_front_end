@@ -8,28 +8,20 @@ import { useDispatch } from "react-redux";
 import { EMPLOYEE_ACTION_TYPES, type Employee } from "../../store/employee/employee.types";
 import { useDeleteEmployeeMutation, } from "../../api-service/employees/employees.api";
 
-export interface EmployeeList {
-  id:number
-  name: string;
-  dateOfJoining: string;
-  experience: number;
-  role: string;
-  status: string;
-  employeeId: string;
-  address: {
-    line1: string;
-    line2: string;
-    houseNo: string;
-    pincode: string;
-  };
-}
 
 export const EmployeeRow = ({ employee }: { employee: Employee}) => {
   const [modalOpen, setModalOpen] = useState(false);
   // const dispatch = useDispatch();
   const navigate = useNavigate();
   const [deleteEmployee] = useDeleteEmployeeMutation();
-
+  
+  function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+  const year = String(date.getFullYear()).slice(-2); // Get last two digits of the year
+  return `${day}-${month}-${year}`;
+}
 
   const handleDelete = (id:number) => {
     deleteEmployee({id});
@@ -46,7 +38,7 @@ export const EmployeeRow = ({ employee }: { employee: Employee}) => {
     <div className="employee-row">
       <div onClick={() => goToEmployee(employee.id)}>{employee.name}</div>
       <div>{employee.employeeId}</div>
-      <div>{employee.dateOfJoining as unknown as string}</div>
+      <div>{formatDate(employee.dateOfJoining as unknown as string)}</div>
       <div>{employee.role}</div>
       <div className={`status ${employee.status.toLowerCase()}`}>
         {employee.status}

@@ -14,7 +14,8 @@ export const MultiLineInput = ({
 }) => {
   return (
     <>
-      <label htmlFor={inputId}>{labelName}</label>
+      <div className="form-element">
+      <label  htmlFor={inputId}>{labelName}</label>
       <div className="Multi-line-input-form-element">
         {lines.map((line) => {
           return (
@@ -27,6 +28,7 @@ export const MultiLineInput = ({
             ></Input>
           );
         })}
+      </div>
       </div>
     </>
   );

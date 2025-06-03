@@ -10,68 +10,6 @@ import type { Employee, EmployeeState } from "../../store/employee/employee.type
 import { useAppSelector } from "../../store/store";
 import { useDeleteEmployeeMutation, useGetEmployeeListQuery } from "../../api-service/employees/employees.api";
 
-// const employeeDatalist= [
-//   {
-//     id: 1,
-//     name: "John",
-//     dateOfJoining: "2025-01-23",
-//     experience: 3,
-//     role: "HR",
-//     status: "ACTIVE",
-//     employeeId: "dfuy54g85478d8937",
-//     address: {
-//       line1: "22nd",
-//       line2: "Baker Street",
-//       houseNo: "22B",
-//       pincode: "987890",
-//     },
-//   },
-//   {
-//     id: 2,
-//     name: "Jane",
-//     dateOfJoining: "2025-01-23",
-//     experience: 3,
-//     role: "HR",
-//     status: "INACTIVE",
-//     employeeId: "kg5903ej3uhg20943",
-//     address: {
-//       line1: "22nd",
-//       line2: "Baker Street",
-//       houseNo: "22B",
-//       pincode: "987890",
-//     },
-//   },
-//   {
-//     id: 3,
-//     name: "Mack",
-//     dateOfJoining: "2025-01-23",
-//     experience: 3,
-//     role: "HR",
-//     status: "ACTIVE",
-//     employeeId: "f949h2948u3098g",
-//     address: {
-//       line1: "22nd",
-//       line2: "Baker Street",
-//       houseNo: "22B",
-//       pincode: "987890",
-//     },
-//   },
-//   {
-//     id: 4,
-//     name: "Max",
-//     dateOfJoining: "2025-01-23",
-//     experience: 3,
-//     role: "HR",
-//     status: "PROBATION",
-//     employeeId: "nju3he3879e393e",
-//     address: {
-//       line1: "22nd",
-//       line2: "Baker Street",
-//       houseNo: "22B",
-//       pincode: "987890",
-//     },
-//   },
-// ];
 
 
 
@@ -84,7 +22,6 @@ const EmployeeList = () => {
 
   console.log(employees)
 
-  //  const employees=newEmployee.length!==0? newEmployee:employeeDatalist;
 
   const getFilter = () => {
     const filter = searchParams.get("filter");
@@ -145,8 +82,8 @@ const EmployeeList = () => {
                 : employees.data
               )
             : []
-          ).map((employee:Employee, index) => (
-            <EmployeeRow key={index} employee={employee} />
+          ).map((employee:Employee) => (
+            <EmployeeRow  employee={employee} />
           ))}
         </div>
       </div>

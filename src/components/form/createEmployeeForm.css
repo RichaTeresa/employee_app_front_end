@@ -41,6 +41,7 @@ form {
     font-weight: 500;
 }
 
+
 #Create {
     background-color: #03AEEE;
     color: white;
@@ -67,9 +68,10 @@ Select {
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 14px;
-    background-color: #fff;
+    background-color: #fafafa;
 }
 
 h2{
    font: Nunito Sans;
 }
+

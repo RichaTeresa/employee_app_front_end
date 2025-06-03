@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom'
 export const Sidebar=()=>{
     return(
         <>
+        <div className='white-top-section'>
+            
+        </div>
         <div className="aside">
             <div className='rectangle'>
             <img className="kv-logo-img"src={kvLogo} width="300px"></img>

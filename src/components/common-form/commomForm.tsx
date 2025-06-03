@@ -1,3 +1,4 @@
+import { useGetDepartmentListQuery } from "../../api-service/department/department.api";
 import Button from "../button/Button";
 import Input from "../input/input";
 import { MultiLineInput } from "../multiLineInput/multiLineInput";
@@ -27,6 +28,9 @@ export const CommonForm = ({
   };
   onChange: (field: string, value: string) => void;
 }) => {
+  const {data:departmentList}=useGetDepartmentListQuery({})
+
+
   return (
     <>
       <div className="parent-class">
@@ -66,11 +70,14 @@ export const CommonForm = ({
           <Select
             selectId="Department"
             selectName="Department"
-            items={[
-              { label: "frontend", value: 1 },
-              { label: "backend", value: 2 },
-              { label: "design", value: 3 },
-            ]}
+            items={
+              departmentList? 
+              departmentList.map((dept) => ({
+                    label: dept.deptName,
+                    value: dept.id,
+                  }))
+                : []
+            }
             value={values.departmentId}
             onChange={(e) => onChange("departmentId", e.target.value)}
           ></Select>
@@ -132,6 +139,7 @@ export const CommonForm = ({
             placeholder="Password"
             value={values.password}
             onChange={(e) => onChange("password", e.target.value)}
+            noPassword={isEdit}
           ></Input>
         </div>
 
@@ -176,7 +184,7 @@ export const CommonForm = ({
             placeholder="Employee Id"
             value={values.employeeId}
             onChange={(e) => onChange("employeeId", e.target.value)}
-            disabled={isEdit}
+            disabled={isEdit}           
           ></Input>
         </div>
       </div>
