@@ -48,7 +48,7 @@ export const CommonForm = ({
         <div className="form-element-group">
           <Input
             inputId="joining_date"
-            inputType="text"
+            inputType="date"
             labelName="Joining Date"
             placeholder="joining_date"
             value={values.dateOfJoining}

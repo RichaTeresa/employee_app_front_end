@@ -3,15 +3,14 @@ import { CommonForm } from "../../components/common-form/commomForm";
 import "./updateEmployee.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/button/Button";
-import { useDispatch, useSelector } from "react-redux";
+
 import {
   EMPLOYEE_ACTION_TYPES,
   type EmployeeState,
   type Role,
   type Status,
 } from "../../store/employee/employee.types";
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import { UpdateEmployee } from "../../store/employee/employeeReducer";
+
 import {
   useGetEmployeeByIdQuery,
   useUpdateEmployeeMutation,
@@ -22,6 +21,14 @@ export const UpdateEmployeeForm = () => {
   // const employee = useAppSelector(state=>state.employee.employees.find(emp => emp.employeeId.toString() === id))
   const { data: employee } = useGetEmployeeByIdQuery({ id });
   const [updateEmployeeApi] = useUpdateEmployeeMutation();
+
+  function formatDate(dateString: string): string {
+    const date=new Date(dateString)
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); 
+  const year = String(date.getFullYear()); 
+  return `${year}-${month}-${day}`;
+}
 
   const [values, setValues] = useState({
     id: 0,
@@ -47,7 +54,7 @@ export const UpdateEmployeeForm = () => {
       id: employee.id,
       name: employee.name,
       employeeId: employee.employeeId,
-      dateOfJoining: employee.dateOfJoining as unknown as string,
+      dateOfJoining:formatDate(employee.dateOfJoining),
       experience: employee.experience,
       departmentId: employee.departmentId,
       role: employee.role,
