@@ -22,10 +22,9 @@
   flex-direction: column;
   width: 100%;
   max-width: 350px;
-  background-color: #fff;
   padding: 30px 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  
 }
 
 
@@ -79,13 +78,14 @@
  flex-direction: row;
 }
 
-.form-input-2 {
+
+.form-input-two {
   position: relative;
   margin-bottom: 8%;
   /* display: flex; */
 }
 
-.form-input-2 input {
+.form-input-two input {
   width: 100%;
   height: 50px;
   border: 1px solid #b4b7bd;
@@ -98,12 +98,12 @@
   background: none;
 }
 
-.form-input-2 input:focus {
+.form-input-two input:focus {
   border-color: #1eb4f0;
   outline: none;
 }
 
-.form-input-2 label {
+.form-input-two label {
   position: absolute;
   left: 16.79px;
   top: 50%;
@@ -120,7 +120,7 @@
 }
 
 /* Using the placeholder-shown pseudo-class for label positioning */
-.form-input-2 input:not(:placeholder-shown) + label {
+.form-input-two input:not(:placeholder-shown) + label {
   top: -10px;
   transform: translateY(0);
   font-size: 14px;
@@ -128,7 +128,7 @@
   background-color: #ffffff;
 }
 
-.form-input-2 input:focus + label {
+.form-input-two input:focus + label {
   top: -10px;
   transform: translateY(0);
   font-size: 14px;
@@ -136,3 +136,9 @@
   background-color: #ffffff;
 }
 
+.checkbox-container {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 10px;
+}

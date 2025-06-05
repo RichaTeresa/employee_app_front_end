@@ -115,12 +115,13 @@ if(isLoggedIn()){
             <LoginInput
               id="username"
               type="text"
-              placeholder="username"
+              label="Username"
+              placeholder=" "
               value={username}
               onChange={saveUsername}
               ref={userNameRef}
               endAdornment={
-                <button
+                <button 
                   disabled={username.length === 0}
                   onClick={() => setUsername("")}
                 >
@@ -132,7 +133,8 @@ if(isLoggedIn()){
             <LoginInput
               id="password"
               type={showPassword ? "text" : "password"}
-              placeholder="password"
+              label="Password"
+              placeholder=" "
               value={password}
               onChange={savePassword}
               endAdornment={
@@ -144,11 +146,11 @@ if(isLoggedIn()){
                 </button>
               }
             ></LoginInput>
+            <div className="checkbox-container">
             <LoginInput
               id="showPassword"
               type="checkbox"
               checked={showPassword}
-              label="show password"
               onChange={() =>
                 setShowPassword((prev) => {
                   localStorage.setItem("showPassword", String(!prev));
@@ -156,6 +158,8 @@ if(isLoggedIn()){
                 })
               }
             ></LoginInput>
+            <label htmlFor="showPassword">show password</label>
+            </div>
             <p style={{ color: "red" }}>{error}</p>
             <Button
               type="submit"
