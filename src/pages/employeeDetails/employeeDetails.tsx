@@ -1,14 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import "./employeeDetails.css";
-import { useSearchParams } from "react-router-dom";
-import { useRef } from "react";
-
 import { DetailElement } from "../../components/detailElement/detailElement";
 import BLUE_CIRCLE from "../../assets/blue-circle-icon.svg";
 import PENCIL from "../../assets/pencil-icon.svg";
-import { useSelector } from "react-redux";
-import type { EmployeeState } from "../../store/employee/employee.types";
-import { useAppSelector } from "../../store/store";
 import { useGetEmployeeByIdQuery } from "../../api-service/employees/employees.api";
 
 

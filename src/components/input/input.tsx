@@ -8,7 +8,8 @@ const Input = ({
   value,
   onChange,
   disabled,
-  noPassword
+  noPassword,
+  required=false
 }: {
   inputId: string;
   inputType: string;
@@ -18,6 +19,7 @@ const Input = ({
   onChange?:(event:React.ChangeEvent<HTMLInputElement>)=>void;
   disabled?:boolean
   noPassword?:boolean
+  required?:boolean
 }) => {
   if(noPassword){
     return 
@@ -32,6 +34,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         disabled={disabled}
+        required={required}
       ></input>
     </div>
   );

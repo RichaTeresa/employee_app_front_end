@@ -14,12 +14,14 @@
 
 .text-header{
     color: #8B8D9D;
+    text-align: center;
 }
 .text{
     color: #434552;
     font-weight: bold;
     width:100px;
     overflow-wrap: break-word;
+    text-align: center;
 }
 
 .status {

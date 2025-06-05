@@ -1,13 +1,11 @@
 import { useState } from "react";
-import { CommonForm } from "../common-form/commomForm";
-import "./createEmployeeForm.css";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+
+import { CommonForm } from "../common-form/commomForm";
+import "./createEmployeeForm.css";
 import Button from "../button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { EMPLOYEE_ACTION_TYPES, type EmployeeState ,type Role,type Status} from "../../store/employee/employee.types";
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import { addEmployee } from "../../store/employee/employeeReducer";
+import {  type EmployeeState ,type Role,type Status} from "../../store/employee/employee.types";
 import { useCreateEmployeeMutation } from "../../api-service/employees/employees.api";
 
 
@@ -66,23 +64,17 @@ export const CreateEmployeeForm = () => {
       pincode: values.pincode,
     },
   };
-
-  try {
-    await createEmployeeApi(payload).unwrap();
+   
+  createEmployeeApi(payload).unwrap()
+  .then(()=>{
     navigate("/employees");
-  } catch (error) {
-    console.log("Create employee failed", error);
-    if (error && typeof error === "object" && "data" in error && error.data && typeof error.data === "object" && "mesage" in error.data) {
-      setError((error as { data: { mesage: string } }).data.mesage);
-    } else {
-      setError("Create employee failed");
-    }
-  }
+  })
+  .catch((error)=>{
+    console.log(error.data.message)
+    setError("Employee could not be created")
+  })
 };
 
-
-
-  
 
   return (
     <>
@@ -91,7 +83,7 @@ export const CreateEmployeeForm = () => {
           <h2>Create Employee</h2>
         </div>
         <div className="section-container">
-          <form>
+          <form onSubmit={CreateEmployee}>
             <CommonForm isEdit={false}
               values={values}
               onChange={(field, value) =>
@@ -105,7 +97,6 @@ export const CreateEmployeeForm = () => {
                 buttonName="Create"
                 className="Create"
                 id="Create"
-                onClick={CreateEmployee}
               ></Button>
               <Button
                 type="reset"

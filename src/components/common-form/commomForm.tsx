@@ -30,6 +30,16 @@ export const CommonForm = ({
 }) => {
   const {data:departmentList}=useGetDepartmentListQuery({})
 
+  const isValid = (email:string) => {
+       if(email && !email.includes('@'))  
+        return (
+          <p style={{ color: "red" }}>
+            this field must be a valid email!
+          </p>
+        );
+  
+    };
+
 
   return (
     <>
@@ -41,7 +51,8 @@ export const CommonForm = ({
             labelName="Employee Name"
             placeholder="employee_name"
             value={values.name}
-            onChange={(e) => onChange("name", e.target.value)}
+            onChange={(e) => onChange("name", e.target.value) }
+            required={true}
           ></Input>
         </div>
 
@@ -53,6 +64,7 @@ export const CommonForm = ({
             placeholder="joining_date"
             value={values.dateOfJoining}
             onChange={(e) => onChange("dateOfJoining", e.target.value)}
+            required={true}
           ></Input>
         </div>
 
@@ -64,6 +76,7 @@ export const CommonForm = ({
             placeholder="experience"
             value={values.experience}
             onChange={(e) => onChange("experience", e.target.value)}
+            required={true}
           ></Input>
         </div>
         <div className="form-element-group">
@@ -77,9 +90,10 @@ export const CommonForm = ({
                     value: dept.id,
                   }))
                 : []
-            }
+            } 
             value={values.departmentId}
             onChange={(e) => onChange("departmentId", e.target.value)}
+            required={true}
           ></Select>
         </div>
         <div className="form-element-group">
@@ -94,6 +108,7 @@ export const CommonForm = ({
             ]}
             value={values.role}
             onChange={(e) => onChange("role", e.target.value)}
+            required={true}
           ></Select>
         </div>
         <div className="form-element-group">
@@ -107,6 +122,7 @@ export const CommonForm = ({
             ]}
             value={values.status}
             onChange={(e) => onChange("status", e.target.value)}
+            required={true}
           ></Select>
         </div>
         <div className="form-element-group">
@@ -117,7 +133,9 @@ export const CommonForm = ({
             placeholder="Email"
             value={values.email}
             onChange={(e) => onChange("email", e.target.value)}
+            required={true}
           ></Input>
+          {isValid(values.email)}
         </div>
 
         <div className="form-element-group">
@@ -128,6 +146,7 @@ export const CommonForm = ({
             placeholder="Age"
             value={values.age}
             onChange={(e) => onChange("age", e.target.value)}
+            required={true}
           ></Input>
         </div>
 
@@ -140,6 +159,7 @@ export const CommonForm = ({
             value={values.password}
             onChange={(e) => onChange("password", e.target.value)}
             noPassword={isEdit}
+            required={true}
           ></Input>
         </div>
 
@@ -184,7 +204,8 @@ export const CommonForm = ({
             placeholder="Employee Id"
             value={values.employeeId}
             onChange={(e) => onChange("employeeId", e.target.value)}
-            disabled={isEdit}           
+            disabled={isEdit}  
+            required={true}         
           ></Input>
         </div>
       </div>

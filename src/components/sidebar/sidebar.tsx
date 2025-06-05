@@ -9,7 +9,7 @@ export const Sidebar=()=>{
     const navigate = useNavigate();
     const onLogout=()=>{
         localStorage.setItem("token","")
-        navigate("/")
+        navigate("/",{replace:true})
     }
 
     return(

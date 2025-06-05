@@ -10,10 +10,10 @@ import { UseMousePosition } from "../../hooks/useMousePosition";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../api-service/auth/login.api";
 
-const validUser = {
-  ValidUsername: "username",
-  ValidPassword: "password",
-};
+// const validUser = {
+//   ValidUsername: "username",
+//   ValidPassword: "password",
+// };
 
 const Login = () => {
 
@@ -44,7 +44,7 @@ if(isLoggedIn()){
     navigate("/employees");
     }).catch((error)=>{
       console.log(error)
-      setError(error.data.mesage)
+      setError(error.data.message)
     })
   };
 
@@ -64,7 +64,7 @@ if(isLoggedIn()){
 
   const [validUsername, setValidUsername] = useState(false);
   useEffect(() => {
-    if (username.length < 10) {
+    if (username.length < 20 ) {
       setValidUsername(true);
       return;
     }
@@ -73,13 +73,29 @@ if(isLoggedIn()){
     return;
   }, [username]);
 
+  useEffect(()=>{
+    if(username.includes('@')){
+      setValidUsername(true);
+      return;
+    }
+    setValidUsername(false);
+    return;
+  },[username])
+
   const isValid = () => {
-    if (!validUsername)
+    if (!validUsername && username.length>20)
       return (
         <p style={{ color: "red" }}>
-          Username must not be more than 10 characters!
+          Username must not be more than 20 characters!
         </p>
       );
+    else if(username && !validUsername)  
+      return (
+        <p style={{ color: "red" }}>
+          Username must be an email
+        </p>
+      );
+
   };
 
   const userNameRef = useRef<HTMLInputElement>(null);

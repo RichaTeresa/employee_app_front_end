@@ -21,6 +21,7 @@ export const UpdateEmployeeForm = () => {
   // const employee = useAppSelector(state=>state.employee.employees.find(emp => emp.employeeId.toString() === id))
   const { data: employee } = useGetEmployeeByIdQuery({ id });
   const [updateEmployeeApi] = useUpdateEmployeeMutation();
+  const [error, setError] = useState("");
 
   function formatDate(dateString: string): string {
     const date=new Date(dateString)
@@ -29,6 +30,7 @@ export const UpdateEmployeeForm = () => {
   const year = String(date.getFullYear()); 
   return `${year}-${month}-${day}`;
 }
+
 
   const [values, setValues] = useState({
     id: 0,
@@ -98,14 +100,16 @@ export const UpdateEmployeeForm = () => {
       },
     };
 
-    try {
-      await updateEmployeeApi({ id: values.id, payload }).unwrap();
-      console.log("payload" ,payload)
-      navigate("/employees");
-    } catch (err) {
+    updateEmployeeApi({ id: values.id, payload }).unwrap()
+    .then(()=>{
+       navigate("/employees");
+    })  
+    . catch ((err) =>{
       console.error("Update failed", err);
-    }
+      setError("Update Failed!")
+    })
   };
+
 
   return (
     <>
@@ -122,7 +126,9 @@ export const UpdateEmployeeForm = () => {
                 setValues({ ...values, [field]: value })
               }
             ></CommonForm>
+            <p style={{ color: "red" }}>{error}</p>
             <div className="form-button">
+              
               <Button
                 type="submit"
                 buttonName="Update"

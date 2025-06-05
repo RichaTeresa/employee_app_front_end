@@ -83,7 +83,7 @@ const EmployeeList = () => {
               )
             : []
           ).map((employee:Employee) => (
-            <EmployeeRow  employee={employee} />
+            <EmployeeRow employee={employee} />
           ))}
         </div>
       </div>

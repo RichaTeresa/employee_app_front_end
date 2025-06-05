@@ -36,7 +36,7 @@ export const EmployeeRow = ({ employee }: { employee: Employee}) => {
 
   return (
     <div className="employee-row">
-      <div onClick={() => goToEmployee(employee.id)}>{employee.name}</div>
+      <div onClick={() => goToEmployee(employee.id)} style={{color:'#24cccd'}}>{employee.name}</div>
       <div>{employee.employeeId}</div>
       <div>{formatDate(employee.dateOfJoining as unknown as string)}</div>
       <div>{employee.role}</div>

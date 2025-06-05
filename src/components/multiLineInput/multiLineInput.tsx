@@ -4,12 +4,13 @@ import "./multiLineInput.css";
 export const MultiLineInput = ({
   inputId,
   labelName,
-  lines
+  lines,
+  required
 }: {
   inputId: string;
   labelName: string;
   lines: { id: string; placeholder: string ;value:string ;onChange?:(event:React.ChangeEvent<HTMLInputElement>)=>void;}[];
-
+  required?:boolean
   
 }) => {
   return (
@@ -25,6 +26,7 @@ export const MultiLineInput = ({
               placeholder={line.placeholder}
               value={line.value}
               onChange={line.onChange}
+              required={true}
             ></Input>
           );
         })}

@@ -383,8 +383,8 @@
 <span class="cstat-no" title="statement not covered" >    navigate("/employees");</span>
 <span class="cstat-no" title="statement not covered" >  } catch (error) {</span>
 <span class="cstat-no" title="statement not covered" >    console.log("Create employee failed", error);</span>
-<span class="cstat-no" title="statement not covered" >    if (error &amp;&amp; typeof error === "object" &amp;&amp; "data" in error &amp;&amp; error.data &amp;&amp; typeof error.data === "object" &amp;&amp; "mesage" in error.data) {</span>
-<span class="cstat-no" title="statement not covered" >      setError((error as { data: { mesage: string } }).data.mesage);</span>
+<span class="cstat-no" title="statement not covered" >    if (error &amp;&amp; typeof error === "object" &amp;&amp; "data" in error &amp;&amp; error.data &amp;&amp; typeof error.data === "object" &amp;&amp; "message" in error.data) {</span>
+<span class="cstat-no" title="statement not covered" >      setError((error as { data: { message: string } }).data.message);</span>
 <span class="cstat-no" title="statement not covered" >    } else {</span>
 <span class="cstat-no" title="statement not covered" >      setError("Create employee failed");</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
